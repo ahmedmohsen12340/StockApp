@@ -1,0 +1,62 @@
+﻿@model RegisterDTO;
+@{
+    ViewBag.Title = "Register";
+}
+<div class="container">
+    <h2>Register</h2>
+    <form method="post">
+        <div>
+            <label asp-for="PersonName">Name</label>
+            <input asp-for="PersonName" />
+            <span asp-validation-for="PersonName"></span>
+        </div>
+        <div>
+            <label asp-for="Email">Email</label>
+            <input asp-for="Email" />
+            <span asp-validation-for="Email"></span>
+        </div>
+        <div>
+            <label asp-for="Phone">Phone</label>
+            <input asp-for="Phone" />
+            <span asp-validation-for="Phone"></span>
+        </div>
+        <div>
+            <label asp-for="Password">Password</label>
+            <input asp-for="Password" />
+            <span asp-validation-for="Password"></span>
+        </div>
+        <div>
+            <label asp-for="ConfirmPassword">Confirm Password</label>
+            <input asp-for="ConfirmPassword" />
+            <span asp-validation-for="ConfirmPassword"></span>
+        </div>
+        <div>
+            <input type="radio" asp-for="UserTypeOptions" id="User" value="User" checked/>
+            <label for="User">User</label>
+            <input type="radio" asp-for="UserTypeOptions" id="Admin" value="Admin"/>
+            <label for="Admin">Admin</label>
+            <span asp-validation-for="UserTypeOptions"></span>
+        </div>
+        <button asp-action="Register" asp-controller="Account">Register</button>
+        @* client side validation*@
+        <div asp-validation-summary="All"></div>
+    </form>
+</div>
+
+@section ClientValiation{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" asp-fallback-test="window.jQuery" asp-fallback-src="~/jQuerylibraries/cdnjs.cloudflare.com_ajax_libs_jquery_3.7.1_jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js" asp-fallback-test="window.jQuery.validator" asp-fallback-src="~/jQuerylibraries/cdnjs.cloudflare.com_ajax_libs_jquery-validate_1.19.5_jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/4.0.0/jquery.validate.unobtrusive.min.js" asp-fallback-test="window.jQuery.validator.unobtrusive" asp-fallback-src="~/jQuerylibraries/cdnjs.cloudflare.com_ajax_libs_jquery-validation-unobtrusive_4.0.0_jquery.validate.unobtrusive.min.js"></script>
+}
+@* Server side validation*@
+@if (ViewBag.errors != null)
+{
+    <div>
+        <ul>
+            @foreach (var error in ViewBag.errors)
+            {
+                <li>@error</li>
+            }
+        </ul>
+    </div>
+}
